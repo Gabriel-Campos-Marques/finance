@@ -16,6 +16,7 @@ class Transaction(BaseModel):
     account = models.ForeignKey('account.Account', on_delete=models.CASCADE, related_name='transactions')
     credit_card = models.ForeignKey('account.CreditCard', on_delete=models.CASCADE, null=True, blank=True, related_name='transactions')
     transaction_date = models.DateField()
+    import_hash = models.CharField(max_length=255, unique=True, null=True, blank=True, help_text="Hash to prevent duplicate imports")
 
     def __str__(self):
         return self.description

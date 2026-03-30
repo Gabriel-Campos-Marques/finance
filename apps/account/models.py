@@ -13,6 +13,7 @@ class CreditCard(BaseModel):
     limit = models.DecimalField(max_digits=10, decimal_places=2)
     statement_closing_date = models.IntegerField(help_text="Day of the month the statement closes")
     statement_due_date = models.IntegerField(help_text="Day of the month the statement is due")
+    card_suffix = models.CharField(max_length=10, null=True, blank=True, help_text="Last 4 digits or suffix to auto-match on imports")
 
     def __str__(self):
         return self.name

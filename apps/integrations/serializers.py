@@ -13,3 +13,11 @@ class TransactionImportSerializer(serializers.Serializer):
         required=True,
         help_text="O arquivo físico contendo as transações"
     )
+    account_id = serializers.IntegerField(
+        required=False,
+        help_text="ID da conta corrente (Necessário para Porto Seguro para mapear/criar cartões automaticamente)"
+    )
+    year = serializers.IntegerField(
+        required=False,
+        help_text="Ano base para a fatura (Necessário para Porto Seguro)"
+    )
