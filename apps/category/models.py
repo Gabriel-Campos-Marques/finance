@@ -30,3 +30,15 @@ class CategoryMappingRule(BaseModel):
 
     def __str__(self):
         return f"{self.pattern} -> {self.category.name}"
+
+class CategoryBudget(BaseModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='budgets')
+    amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Planned budget amount")
+    month = models.DateField(help_text="First day of the month for this budget (e.g., 2026-04-01)")
+
+    class Meta:
+        unique_together = ('category', 'month')
+        ordering = ['-month', 'category__name']
+
+    def __str__(self):
+        return f"{self.category.name} - {self.month.strftime('%m/%Y')} - {self.amount}"
